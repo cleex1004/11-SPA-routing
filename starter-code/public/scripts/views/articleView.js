@@ -51,6 +51,15 @@
   /* DONE: Once the routes are handling '/' and '/about', we can delete
       this handleMainNav function. YESSSS! */
 
+  articleView.setTeasers = function() {
+    $('.article-body *:nth-of-type(n+2)').hide();
+
+    $('#articles').on('click', 'a.read-on', function(e) {
+      e.preventDefault();
+      $(this).parent().find('*').fadeIn();
+      $(this).hide();
+    });
+  };
 
   articleView.initIndexPage = () => {
     $('#ajax-spinner').fadeOut();
