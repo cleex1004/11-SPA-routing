@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 const conString = 'postgres://localhost:5432'; // DONE: Don't forget to set your own conString
 const client = new pg.Client(conString);
-client.connect(console.error);
+client.connect();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -15,11 +15,9 @@ app.use(express.static('./public'));
 
 
 // NOTE: Routes for requesting HTML resources
-app.get('/', (request, response) => response.sendFile('index.html', {root: '.'}));
-app.get('/new', (request, response) => response.sendFile('new.html', {root: '.'}));
-app.get('*', (req, res) => {
-  res.sendFile('index.html', { root: './public' })
-});
+app.get('/', (request, response) => response.sendFile('index.html', {root: './public'}));
+app.get('/new', (request, response) => response.sendFile('new.html', {root: './public'}));
+app.get('/about', (request, response) => response.sendFile('index.html', {root: './public'}));
 
 
 
